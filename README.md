@@ -1,4 +1,4 @@
-# SpringBootEducationSystem
+# Spring Boot Education System
 
 Education System based on SpringBoot and REST
 
