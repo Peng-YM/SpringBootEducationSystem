@@ -4,7 +4,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "courses")
@@ -14,11 +13,17 @@ public class Course extends BaseModel{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long courseId;
 
+    @Column(unique = true) // unique course code
+    private String courseCode;
+
     @Column(name = "course_name")
     private String courseName;
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /**
+     * teachers for the courses
+     */
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "course_teachers",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
@@ -26,12 +31,23 @@ public class Course extends BaseModel{
     )
     private Collection<User> teachers;
 
+    /**
+     *  students which take the courses
+     */
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "course_students",
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    )
+    private Collection<User> students;
+
     public Course(){}
 
-    public Course(String courseName, String description, List<User> teachers) {
+    public Course(String courseCode, String courseName, String description) {
+        this.courseCode = courseCode;
         this.courseName = courseName;
         this.description = description;
-        this.teachers = teachers;
     }
 
     public long getCourseId() {
@@ -40,6 +56,14 @@ public class Course extends BaseModel{
 
     public void setCourseId(long courseId) {
         this.courseId = courseId;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getCourseName() {
@@ -66,5 +90,15 @@ public class Course extends BaseModel{
     @Transactional
     public void setTeachers(Collection<User> teachers) {
         this.teachers = teachers;
+    }
+
+    @Transactional
+    public Collection<User> getStudents() {
+        return students;
+    }
+
+    @Transactional
+    public void setStudents(Collection<User> students) {
+        this.students = students;
     }
 }

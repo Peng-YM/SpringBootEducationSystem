@@ -24,9 +24,11 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
         if (user == null){
             throw new UsernameNotFoundException("Invalid username or password");
+        }else{
+
         }
         return new org.springframework.security.core.userdetails.User
-                (user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.roles));
+                (user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){

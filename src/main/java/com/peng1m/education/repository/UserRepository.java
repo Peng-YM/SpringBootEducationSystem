@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RepositoryRestResource(
         collectionResourceRel = "users",
         path = "users")
-//@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     /**
      * Access user's info by email, only allows the user to access his own info.
@@ -17,7 +16,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      * @param email email
      * @return User
      */
-//    @PreAuthorize("hasRole('ADMIN') or #email == principal.username")
     User findByEmail(@Param("email") String email);
 
     @Override

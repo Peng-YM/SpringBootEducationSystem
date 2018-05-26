@@ -13,19 +13,8 @@ public class Exam {
     @Column(name = "exam_id")
     private Long examId;
 
-    // many to many relationship
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "student_exams",
-        joinColumns = @JoinColumn(
-                name = "exam_id", referencedColumnName = "exam_id"),
-        inverseJoinColumns = @JoinColumn(
-                name = "user_id", referencedColumnName = "user_id"
-        )
-    )
-    private Collection<User> students;
-
     // many to one
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private Course course;
 
@@ -34,8 +23,7 @@ public class Exam {
 
     public Exam(){}
 
-    public Exam(Collection<User> students, Course course, String examName) {
-        this.students = students;
+    public Exam(Course course, String examName) {
         this.course = course;
         this.examName = examName;
     }
@@ -48,16 +36,6 @@ public class Exam {
         this.examId = examId;
     }
 
-    @Transactional
-    public Collection<User> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Collection<User> students) {
-        this.students = students;
-    }
-
-    @Transactional
     public Course getCourse() {
         return course;
     }
