@@ -1,52 +1,35 @@
 package com.peng1m.education.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseModel{
+public class User extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private Long userId;
+    private long userId;
 
+    @NotNull
     @Email
-    @Column(unique = true, nullable = false) // email is unique and not null
+    @Column(unique = true)
     private String email;
+    private String firstName;
+    private String lastName;
+    private String phone;
 
-    @JsonIgnore  // ignore password in returned JSON
-    @Size(min = 6) // password should not short than 6 characters
-    @Column(nullable = false) // not null
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "role_id")
-    )
-
-    @JsonIgnore
-    private Collection<Role> roles;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_id")
-    @RestResource(path = "profiles", rel = "profiles")
-    private Profile profile;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Credential credential;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "course_teachers",
+            name = "course_users",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     )
@@ -55,18 +38,11 @@ public class User extends BaseModel{
 
     public User(){}
 
-    public User(String email, String password, Collection<Role> roles) {
+    public User(String email, String firstName, String lastName, String phone) {
         this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -77,28 +53,46 @@ public class User extends BaseModel{
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    @Transactional
+    public Credential getCredential() {
+        return credential;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Transactional
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Transactional

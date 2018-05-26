@@ -8,4 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
         collectionResourceRel = "exams",
         path = "exams")
 public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
+
 }

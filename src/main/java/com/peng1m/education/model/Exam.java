@@ -1,9 +1,5 @@
 package com.peng1m.education.model;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name = "exams")
