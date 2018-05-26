@@ -1,14 +1,18 @@
 package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Collection;
 
+@Data
 @Entity
 @Table(name = "courses")
-public class Course extends BaseModel{
+@ToString
+public class Course {
     @Id
     @Column(name = "course_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +38,7 @@ public class Course extends BaseModel{
     private Collection<User> teachers;
 
     /**
-     *  students which take the courses
+     * students which take the courses
      */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
@@ -44,43 +48,12 @@ public class Course extends BaseModel{
     )
     private Collection<User> students;
 
-    public Course(){}
+    public Course() {
+    }
 
     public Course(String courseCode, String courseName, String description) {
         this.courseCode = courseCode;
         this.courseName = courseName;
-        this.description = description;
-    }
-
-    public long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(long courseId) {
-        this.courseId = courseId;
-    }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 

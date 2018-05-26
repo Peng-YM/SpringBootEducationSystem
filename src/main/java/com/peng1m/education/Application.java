@@ -32,7 +32,11 @@ public class Application {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @PostConstruct
+    public static void main(String args[]) {
+        SpringApplication.run(Application.class, args);
+    }
+
+//    @PostConstruct
     public void init() {
         Role userRole = roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.save(new Role("ROLE_ADMIN"));
@@ -80,7 +84,7 @@ public class Application {
         Exam exam = examRepository.save(new Exam(course, "Mid-term"));
         Mark userMark = markRepository.save(
                 new Mark(
-                       user, exam, 100
+                        user, exam, 100
                 )
         );
 
@@ -89,13 +93,6 @@ public class Application {
                         user1, exam, 100
                 )
         );
-//        User user = userRepository.findByEmail("11510035@mail.sustc.edu.cn");
-//        for(Course course: user.getCourses()){
-//            System.out.println(course.getCourseName());
-//        }
-    }
-
-    public static void main(String args[]) {
-        SpringApplication.run(Application.class, args);
+        System.out.println(user.toString());
     }
 }

@@ -1,7 +1,8 @@
 package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.rest.core.annotation.RestResource;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -9,9 +10,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
+@Data
 @Entity
 @Table(name = "users")
-public class User extends BaseModel {
+@ToString
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -37,7 +40,8 @@ public class User extends BaseModel {
     )
     private Collection<Course> courses;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String email, String firstName, String lastName, String phone, Credential credential) {
         this.email = email;
@@ -45,14 +49,6 @@ public class User extends BaseModel {
         this.lastName = lastName;
         this.phone = phone;
         this.credential = credential;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Transactional
@@ -65,44 +61,8 @@ public class User extends BaseModel {
         this.credential = credential;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     @Transactional
     public Collection<Course> getCourses() {
         return courses;
-    }
-
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
     }
 }

@@ -19,8 +19,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     /**
      * Only admin and the user himself can create/update user.
+     *
      * @param profile user profile
-     * @param <S> subtype
+     * @param <S>     subtype
      * @return User
      */
     @PreAuthorize("hasRole('ADMIN') or #profile.credential.username == principal.username")
@@ -29,6 +30,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     /**
      * Only admin and the user himself can access profile
+     *
      * @param id
      * @return null or user object
      */
@@ -38,6 +40,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     /**
      * Only admin can delete user
+     *
      * @param id userId
      */
     @PostAuthorize("hasRole('ADMIN')")
@@ -46,6 +49,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     /**
      * Only admin can access all user list
+     *
      * @return List of users
      */
     @PreAuthorize("hasRole('ADMIN')")

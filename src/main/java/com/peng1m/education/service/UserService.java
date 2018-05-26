@@ -1,7 +1,7 @@
 package com.peng1m.education.service;
 
-import com.peng1m.education.model.Role;
 import com.peng1m.education.model.Credential;
+import com.peng1m.education.model.Role;
 import com.peng1m.education.repository.internal.CredentialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,14 +22,14 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Credential credential = credentialRepository.findByUsername(username);
-        if (credential == null){
+        if (credential == null) {
             throw new UsernameNotFoundException("Invalid username or password");
         }
         return new org.springframework.security.core.userdetails.User
                 (credential.getUsername(), credential.getPassword(), mapRolesToAuthorities(credential.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());

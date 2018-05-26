@@ -1,5 +1,6 @@
 package com.peng1m.education.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -7,7 +8,8 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "exams")
-public class Exam extends BaseModel{
+@ToString
+public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "exam_id")
@@ -27,7 +29,8 @@ public class Exam extends BaseModel{
     @OneToMany(mappedBy = "exam", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Collection<Mark> marks;
 
-    public Exam(){}
+    public Exam() {
+    }
 
     public Exam(Course course, String examName) {
         this.course = course;

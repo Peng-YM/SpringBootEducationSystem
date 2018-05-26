@@ -20,6 +20,12 @@ spring:
       # this is for lazy loading
       hibernate.enable_lazy_load_no_trans: true
 
+# ===============================
+# = Spring data rest configurations
+# ===============================
+  data:
+    rest:
+      base-path: /api
 
 # ===============================
 # = Logging configurations

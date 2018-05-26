@@ -1,16 +1,19 @@
 package com.peng1m.education.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
+@Data
 @Entity
 @Table(name = "credentials")
-public class Credential extends BaseModel{
+@ToString
+public class Credential {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "credential_id")
@@ -38,36 +41,13 @@ public class Credential extends BaseModel{
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Credential(){}
+    public Credential() {
+    }
 
     public Credential(String username, String password, Collection<Role> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;
-    }
-
-    public Long getCredentialId() {
-        return credentialId;
-    }
-
-    public void setCredentialId(Long credentialId) {
-        this.credentialId = credentialId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Transactional

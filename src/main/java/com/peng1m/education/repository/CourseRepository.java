@@ -17,7 +17,8 @@ public interface CourseRepository extends PagingAndSortingRepository<Course, Lon
 
     /**
      * Only allow admin to edit the course information
-     * @param s course
+     *
+     * @param s   course
      * @param <S> Course class
      * @return Course
      */
@@ -27,6 +28,7 @@ public interface CourseRepository extends PagingAndSortingRepository<Course, Lon
 
     /**
      * Only allow admin to delete the course
+     *
      * @param aLong
      */
     @PreAuthorize("hasRole('ADMIN')")

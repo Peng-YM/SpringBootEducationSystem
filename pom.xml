@@ -69,6 +69,13 @@
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <version>6.0.2.Final</version>
         </dependency>
+        <!--Lombok data annotation-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
