@@ -10,29 +10,44 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.Optional;
 
 @RepositoryRestResource(
-        collectionResourceRel = "profiles",
-        path = "profiles"
+        collectionResourceRel = "users",
+        path = "users"
 )
 @PreAuthorize("hasRole('USER')")
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @Override
-    void delete(User user);
-
+    /**
+     * Only admin and the user himself can create/update user.
+     * @param profile user profile
+     * @param <S> subtype
+     * @return User
+     */
     @PreAuthorize("hasRole('ADMIN') or #profile.credential.username == principal.username")
     @Override
     <S extends User> S save(S profile);
 
+    /**
+     * Only admin and the user himself can access profile
+     * @param id
+     * @return null or user object
+     */
     @PostAuthorize("hasRole('ADMIN') or returnObject.get().userId == #id")
     @Override
     Optional<User> findById(@Param("id") Long id);
 
+    /**
+     * Only admin can delete user
+     * @param id userId
+     */
     @PostAuthorize("hasRole('ADMIN')")
     @Override
     void deleteById(Long id);
 
+    /**
+     * Only admin can access all user list
+     * @return List of users
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @Override
     Iterable<User> findAll();

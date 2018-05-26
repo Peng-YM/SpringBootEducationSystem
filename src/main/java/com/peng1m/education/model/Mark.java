@@ -1,37 +1,62 @@
 package com.peng1m.education.model;
 
+import org.hibernate.validator.constraints.Range;
+import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "marks")
-public class Mark {
+public class Mark extends BaseModel{
     @Id
-    @GeneratedValue()
-    private Long id;
+    @Column(name = "mark_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long markId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
+    @RestResource(path = "student", rel = "student")
     private User student;
 
-    @OneToOne
+    /**
+     * One exam can have many marks.
+     */
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "exam_id")
+    @RestResource(path = "exam", rel = "exam")
     private Exam exam;
+
+    @NotNull
+    @Range(min = 0, max = 100) // range validation
+    private float score;
 
     public Mark(){}
 
-    public Mark(User student, Exam exam) {
+    public Mark(User student, Exam exam, float score) {
         this.student = student;
         this.exam = exam;
+        this.score = score;
     }
 
-    public Long getId() {
-        return id;
+    public float getScore() {
+        return score;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setScore(float score) {
+        this.score = score;
     }
 
+    public Long getMarkId() {
+        return markId;
+    }
+
+    public void setMarkId(Long markId) {
+        this.markId = markId;
+    }
+
+    @Transactional
     public User getStudent() {
         return student;
     }
@@ -40,6 +65,7 @@ public class Mark {
         this.student = student;
     }
 
+    @Transactional
     public Exam getExam() {
         return exam;
     }

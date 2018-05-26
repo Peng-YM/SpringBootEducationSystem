@@ -24,7 +24,7 @@ public class Credential extends BaseModel{
     @Column(nullable = false) // not null
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "credential_roles",
             joinColumns = @JoinColumn(
@@ -32,10 +32,9 @@ public class Credential extends BaseModel{
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "role_id")
     )
-    @JsonIgnore
     private Collection<Role> roles;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -71,10 +70,12 @@ public class Credential extends BaseModel{
         this.password = password;
     }
 
+    @Transactional
     public Collection<Role> getRoles() {
         return roles;
     }
 
+    @Transactional
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }

@@ -17,6 +17,9 @@ spring:
     database-platform: MYSQL
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+      # this is for lazy loading
+      hibernate.enable_lazy_load_no_trans: true
+
 
 # ===============================
 # = Logging configurations

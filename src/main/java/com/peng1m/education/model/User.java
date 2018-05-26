@@ -1,5 +1,6 @@
 package com.peng1m.education.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,8 @@ public class User extends BaseModel {
     private String lastName;
     private String phone;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private Credential credential;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -33,16 +35,16 @@ public class User extends BaseModel {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     )
-    @RestResource(path = "courses", rel = "courses")
     private Collection<Course> courses;
 
     public User(){}
 
-    public User(String email, String firstName, String lastName, String phone) {
+    public User(String email, String firstName, String lastName, String phone, Credential credential) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+        this.credential = credential;
     }
 
     public String getEmail() {

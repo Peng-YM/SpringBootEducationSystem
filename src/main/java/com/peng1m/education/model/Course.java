@@ -1,5 +1,6 @@
 package com.peng1m.education.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Course extends BaseModel{
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     )
+    @JsonIgnore
     private Collection<User> teachers;
 
     /**
