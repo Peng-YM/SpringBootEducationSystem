@@ -2,11 +2,9 @@ package com.peng1m.education.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
@@ -16,7 +14,7 @@ public class Credential extends BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "credential_id")
-    private Long userId;
+    private Long credentialId;
 
     @Column(unique = true, nullable = false) // username is unique and not null
     private String username;
@@ -49,12 +47,12 @@ public class Credential extends BaseModel{
         this.roles = roles;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getCredentialId() {
+        return credentialId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setCredentialId(Long credentialId) {
+        this.credentialId = credentialId;
     }
 
     public String getUsername() {
