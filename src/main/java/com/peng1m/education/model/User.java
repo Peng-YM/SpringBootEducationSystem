@@ -6,6 +6,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -18,13 +21,15 @@ public class User extends BaseModel{
 
     private String firstName;
     private String lastName;
-    // email is unique
-    @NonNull
-    @Column(unique = true)
+
+    @NotNull
+    @Email
+    @Column(unique = true) // email is unique
     private String email;
-    // ignore password in returned JSON
+
     @NonNull
-    @JsonIgnore
+    @JsonIgnore  // ignore password in returned JSON
+    @Size(min = 6, max = 12) // password should not long that 12 and short than 6 characters
     private String password;
 
     public User(){}
