@@ -17,6 +17,8 @@ public class Mark {
     @JoinColumn(name = "exam_id")
     private Exam exam;
 
+    public Mark(){}
+
     public Mark(User student, Exam exam) {
         this.student = student;
         this.exam = exam;

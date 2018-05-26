@@ -32,6 +32,14 @@ public class Exam {
     @Column(name = "exam_name")
     private String examName;
 
+    public Exam(){}
+
+    public Exam(Collection<User> students, Course course, String examName) {
+        this.students = students;
+        this.course = course;
+        this.examName = examName;
+    }
+
     public Long getExamId() {
         return examId;
     }

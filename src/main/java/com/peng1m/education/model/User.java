@@ -2,9 +2,6 @@ package com.peng1m.education.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.rest.core.annotation.RestResource;
-import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -27,19 +24,10 @@ public class User extends BaseModel{
     @Column(unique = true) // email is unique
     private String email;
 
-    @NonNull
+    @NotNull
     @JsonIgnore  // ignore password in returned JSON
-    @Size(min = 6, max = 12) // password should not long that 12 and short than 6 characters
+    @Size(min = 6) // password should not short than 6 characters
     private String password;
-
-    public User(){}
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -49,7 +37,20 @@ public class User extends BaseModel{
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "role_id")
     )
+    @JsonIgnore
     public Collection<Role> roles;
+
+    public User(){}
+
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+
 
 
 

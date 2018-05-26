@@ -26,6 +26,8 @@ public class Course extends BaseModel{
     )
     private Collection<User> teachers;
 
+    public Course(){}
+
     public Course(String courseName, String description, List<User> teachers) {
         this.courseName = courseName;
         this.description = description;
