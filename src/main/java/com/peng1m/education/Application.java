@@ -1,5 +1,6 @@
 package com.peng1m.education;
 
+import com.peng1m.education.config.SecurityUtils;
 import com.peng1m.education.model.*;
 import com.peng1m.education.repository.CourseRepository;
 import com.peng1m.education.repository.ExamRepository;
@@ -10,6 +11,7 @@ import com.peng1m.education.repository.internal.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
@@ -36,18 +38,31 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Only for debug usage, insert sample data, will be deleted on production!
+     * If you don't want to create sample data, comment the @PostConstruct annotation
+     */
 //    @PostConstruct
     public void init() {
+        SecurityUtils.runAs("system", "system", "ROLE_USER", "ROLE_ADMIN");
+
+        userRepository.deleteAll();
+        courseRepository.deleteAll();
+        roleRepository.deleteAll();
+        credentialRepository.deleteAll();
+        examRepository.deleteAll();
+        markRepository.deleteAll();
+
         Role userRole = roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.save(new Role("ROLE_ADMIN"));
 
         Credential credential = credentialRepository.save(new Credential(
-                "11510035@mail.sustc.edu.cn",
+                "pengym@qq.com",
                 encoder.encode("123456"),
                 Arrays.asList(userRole, adminRole)
         ));
         User user = userRepository.save(new User(
-                "11510035@mail.sustc.edu.cn",
+                "pengym@qq.com",
                 "YM",
                 "Peng",
                 "12345678901",
@@ -55,13 +70,13 @@ public class Application {
         ));
 
         Credential credential1 = credentialRepository.save(new Credential(
-                "11510050@mail.sustc.edu.cn",
+                "wang@qq.com",
                 encoder.encode("123456"),
                 Arrays.asList(userRole)
         ));
 
         User user1 = new User(
-                "11510050@mail.sustc.edu.cn",
+                "wang@qq.com",
                 "GY",
                 "Wang",
                 "12345678901",
@@ -94,5 +109,6 @@ public class Application {
                 )
         );
         System.out.println(user.toString());
+        SecurityContextHolder.clearContext();
     }
 }

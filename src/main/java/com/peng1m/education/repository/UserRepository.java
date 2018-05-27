@@ -13,7 +13,7 @@ import java.util.Optional;
         collectionResourceRel = "users",
         path = "users"
 )
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
 

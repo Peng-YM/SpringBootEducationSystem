@@ -20,6 +20,7 @@
     </properties>
 
     <dependencies>
+        <!--=============================================== Back End ==================================================-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -76,7 +77,26 @@
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
-        <!-- testing -->
+        <!--=============================================== Front End ==================================================-->
+        <!--<dependency>-->
+            <!--<groupId>org.thymeleaf.extras</groupId>-->
+            <!--<artifactId>thymeleaf-extras-springsecurity4</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; hot swapping, disable cache for template, enable live reload &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash; Optional, for bootstrap &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.webjars</groupId>-->
+            <!--<artifactId>bootstrap</artifactId>-->
+            <!--<version>3.3.7</version>-->
+        <!--</dependency>-->
+
+        <!--================================================ Test =====================================================-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
