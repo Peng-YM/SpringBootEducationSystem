@@ -3,7 +3,13 @@
 Education System based on SpringBoot and REST
 
 ## Development
-Use command below:
+### Prerequisites
+1. Maven
+2. JDK-8(not compatible with JDK-9)
+### Configure MySQL database
+Edit `application.yml` to set your database name, username and password.
+
+Then use command below:
 
 ```
 $ mvn spring-boot:run
