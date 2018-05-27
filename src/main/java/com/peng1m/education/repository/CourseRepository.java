@@ -1,6 +1,7 @@
 package com.peng1m.education.repository;
 
 import com.peng1m.education.model.Course;
+import io.swagger.annotations.Api;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RepositoryRestResource(
         collectionResourceRel = "courses",
         path = "courses")
+@Api(tags = {"courses"})
 @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public interface CourseRepository extends PagingAndSortingRepository<Course, Long> {
     /**
@@ -21,8 +23,6 @@ public interface CourseRepository extends PagingAndSortingRepository<Course, Lon
      * @return Course
      */
     Course findByCourseCode(@Param("code") String courseCode);
-
-    Course getLearningCourses()
 
     /**
      * Only allow admin to edit the course information

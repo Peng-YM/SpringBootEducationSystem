@@ -11,13 +11,15 @@ import com.peng1m.education.repository.internal.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
+
 @SpringBootApplication
+@RepositoryRestController
 public class Application {
     @Autowired
     private UserRepository userRepository;

@@ -20,8 +20,6 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
-    @Autowired
-    AccessDeniedHandler accessDeniedHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,10 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/**").authenticated()
                     .anyRequest().permitAll()
                 .and()
-                    .httpBasic()
-                .and()
-                    .exceptionHandling()
-                    .accessDeniedHandler(accessDeniedHandler);
+                    .httpBasic();
     }
 
     @Bean
