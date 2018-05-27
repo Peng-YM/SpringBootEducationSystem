@@ -1,6 +1,7 @@
 package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "users")
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,11 +36,11 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "course_users",
+            name = "course_students",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     )
-    private Collection<Course> courses;
+    private Collection<Course> learningCourses;
 
     public User() {
     }
@@ -59,10 +61,5 @@ public class User {
     @Transactional
     public void setCredential(Credential credential) {
         this.credential = credential;
-    }
-
-    @Transactional
-    public Collection<Course> getCourses() {
-        return courses;
     }
 }

@@ -1,9 +1,10 @@
 package com.peng1m.education.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "marks")
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Mark {
     @Id
     @Column(name = "mark_id")
@@ -21,15 +23,15 @@ public class Mark {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
-    @RestResource(path = "student", rel = "student")
+    @JsonIgnore
     private User student;
 
     /**
-     * One exam can have many marks.
+     * A mark is corresponding to an exam
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "exam_id")
-    @RestResource(path = "exam", rel = "exam")
+    @JsonIgnore
     private Exam exam;
 
     @NotNull

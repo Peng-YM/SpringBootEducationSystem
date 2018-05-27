@@ -1,6 +1,9 @@
 package com.peng1m.education.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.ToString;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -9,25 +12,21 @@ import java.util.Collection;
 @Entity
 @Table(name = "exams")
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "exam_id")
     private Long examId;
 
-    // many to one
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    // one to one
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id")
+    @JsonIgnore
     private Course course;
 
     @Column(name = "exam_name")
     private String examName;
-
-    /**
-     * One exam has many marks
-     */
-    @OneToMany(mappedBy = "exam", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    private Collection<Mark> marks;
 
     public Exam() {
     }
@@ -45,10 +44,12 @@ public class Exam {
         this.examId = examId;
     }
 
+    @Transactional
     public Course getCourse() {
         return course;
     }
 
+    @Transactional
     public void setCourse(Course course) {
         this.course = course;
     }
@@ -59,15 +60,5 @@ public class Exam {
 
     public void setExamName(String examName) {
         this.examName = examName;
-    }
-
-    @Transactional
-    public Collection<Mark> getMarks() {
-        return marks;
-    }
-
-    @Transactional
-    public void setMarks(Collection<Mark> marks) {
-        this.marks = marks;
     }
 }

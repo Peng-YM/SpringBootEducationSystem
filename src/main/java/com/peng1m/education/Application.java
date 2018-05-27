@@ -45,7 +45,6 @@ public class Application {
 //    @PostConstruct
     public void init() {
         SecurityUtils.runAs("system", "system", "ROLE_USER", "ROLE_ADMIN");
-
         userRepository.deleteAll();
         courseRepository.deleteAll();
         roleRepository.deleteAll();
