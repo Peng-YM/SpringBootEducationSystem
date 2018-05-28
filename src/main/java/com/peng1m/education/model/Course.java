@@ -51,6 +51,10 @@ public class Course {
     @JsonIgnore
     private Collection<User> students;
 
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private Collection<FileResource> resources;
+
     public Course() {
     }
 

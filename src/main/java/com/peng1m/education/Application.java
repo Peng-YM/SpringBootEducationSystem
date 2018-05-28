@@ -1,5 +1,6 @@
 package com.peng1m.education;
 
+import com.peng1m.education.config.FileStorageProperties;
 import com.peng1m.education.config.SecurityUtils;
 import com.peng1m.education.model.*;
 import com.peng1m.education.repository.CourseRepository;
@@ -11,15 +12,19 @@ import com.peng1m.education.repository.internal.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 
 @SpringBootApplication
-@RepositoryRestController
+@EnableConfigurationProperties({
+        FileStorageProperties.class
+})
 public class Application {
     @Autowired
     private UserRepository userRepository;
@@ -44,7 +49,7 @@ public class Application {
      * Only for debug usage, insert sample data, will be deleted on production!
      * If you don't want to create sample data, comment the @PostConstruct annotation
      */
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         SecurityUtils.runAs("system", "system", "ROLE_USER", "ROLE_ADMIN");
         userRepository.deleteAll();

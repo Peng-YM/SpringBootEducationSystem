@@ -3,6 +3,8 @@ package com.peng1m.education.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -18,7 +20,7 @@ import java.util.Collections;
 //@Configuration
 //@EnableSwagger2
 //@Import({SpringDataRestConfiguration.class})
-public class SwaggerConfig {
+public class SwaggerConfig extends WebMvcConfigurationSupport {
     @Bean
     public Docket docket(){
         Tag userTag = new Tag("user", "Repository for User");
@@ -43,5 +45,14 @@ public class SwaggerConfig {
                 "Terms of service",
                 new Contact("", "https://github.com/Peng-YM", ""),
                 "License of API", "https://github.com/Peng-YM", Collections.emptyList());
+    }
+
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }

@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.peng1m.education.config.FileStorageProperties",
+      "name": "file",
+      "type": "com.peng1m.education.config.FileStorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.peng1m.education.config.FileStorageProperties",
+      "name": "file.upload-dir",
+      "type": "java.lang.String"
+    }
+  ]
+}
