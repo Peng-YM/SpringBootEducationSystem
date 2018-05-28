@@ -1,4 +1,6 @@
 # Spring Boot Education System
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Build Status](https://travis-ci.com/Peng-YM/SpringBootEducationSystem.svg?token=zkm2xxngEhnJD2JPqh6t&branch=master)](https://travis-ci.com/Peng-YM/SpringBootEducationSystem)
 
 Education System based on SpringBoot and REST
 
@@ -26,3 +28,6 @@ Then open the address localhost:8080/api to open the HAL browser.
 - [x] Spring Data
 
 - [x] Spring Security
+
+## LICENSE
+GPL V3
