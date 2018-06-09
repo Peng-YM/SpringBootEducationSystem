@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="MacMySQL">
+<dataSource name="EAS@localhost">
   <database-model serializer="dbm" rdbms="MYSQL" format-version="4.7">
     <root id="1">
       <DefaultCasing>mixed/mixed</DefaultCasing>
@@ -912,260 +912,339 @@
     <table id="230" parent="2" name="exams">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="231" parent="2" name="hibernate_sequence">
+    <table id="231" parent="2" name="file_resources">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="232" parent="2" name="marks">
+    <table id="232" parent="2" name="hibernate_sequence">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="233" parent="2" name="roles">
+    <table id="233" parent="2" name="marks">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="234" parent="2" name="users">
+    <table id="234" parent="2" name="roles">
       <Engine>MyISAM</Engine>
     </table>
-    <column id="235" parent="225" name="course_id">
+    <table id="235" parent="2" name="user_roles">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="236" parent="2" name="users">
+      <Engine>MyISAM</Engine>
+    </table>
+    <column id="237" parent="225" name="course_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="236" parent="225" name="user_id">
+    <column id="238" parent="225" name="user_id">
       <Position>2</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="237" parent="225" name="FKj5fbpmgy0y0es0gvk0311jor3">
+    <index id="239" parent="225" name="FKj5fbpmgy0y0es0gvk0311jor3">
       <ColNames>course_id</ColNames>
     </index>
-    <index id="238" parent="225" name="FKq1158o0xpbhoxtihu2w854c8j">
+    <index id="240" parent="225" name="FKq1158o0xpbhoxtihu2w854c8j">
       <ColNames>user_id</ColNames>
     </index>
-    <column id="239" parent="226" name="course_id">
+    <column id="241" parent="226" name="course_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="226" name="user_id">
+    <column id="242" parent="226" name="user_id">
       <Position>2</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="241" parent="226" name="FK84v77efghiwpxgicxggm5rpdv">
+    <index id="243" parent="226" name="FK84v77efghiwpxgicxggm5rpdv">
       <ColNames>course_id</ColNames>
     </index>
-    <index id="242" parent="226" name="FK7dtau95vh3vvh6oa5vt9kmgb9">
+    <index id="244" parent="226" name="FK7dtau95vh3vvh6oa5vt9kmgb9">
       <ColNames>user_id</ColNames>
     </index>
-    <column id="243" parent="227" name="course_id">
+    <column id="245" parent="227" name="course_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="227" name="course_code">
+    <column id="246" parent="227" name="course_code">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="227" name="course_name">
+    <column id="247" parent="227" name="course_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="227" name="description">
+    <column id="248" parent="227" name="description">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="247" parent="227" name="UK_p02ts69sh53ptd62m3c67v0">
+    <index id="249" parent="227" name="UK_p02ts69sh53ptd62m3c67v0">
       <ColNames>course_code</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="248" parent="227" name="PRIMARY">
+    <key id="250" parent="227" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>course_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="249" parent="227" name="UK_p02ts69sh53ptd62m3c67v0">
+    <key id="251" parent="227" name="UK_p02ts69sh53ptd62m3c67v0">
       <ColNames>course_code</ColNames>
       <UnderlyingIndexName>UK_p02ts69sh53ptd62m3c67v0</UnderlyingIndexName>
     </key>
-    <column id="250" parent="228" name="credential_id">
+    <column id="252" parent="228" name="credential_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="251" parent="228" name="role_id">
+    <column id="253" parent="228" name="role_id">
       <Position>2</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="252" parent="228" name="FKraqsyqpa9gyjwvtluobinmc38">
+    <index id="254" parent="228" name="FKraqsyqpa9gyjwvtluobinmc38">
       <ColNames>credential_id</ColNames>
     </index>
-    <index id="253" parent="228" name="FK5rsslv5e4wixihf5ry73c8w43">
+    <index id="255" parent="228" name="FK5rsslv5e4wixihf5ry73c8w43">
       <ColNames>role_id</ColNames>
     </index>
-    <column id="254" parent="229" name="credential_id">
+    <column id="256" parent="229" name="credential_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="255" parent="229" name="password">
+    <column id="257" parent="229" name="password">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="229" name="username">
+    <column id="258" parent="229" name="username">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="229" name="user_id">
+    <column id="259" parent="229" name="user_id">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="258" parent="229" name="UK_l7xhygibdj6cgkpj2ih1jgx14">
+    <index id="260" parent="229" name="UK_l7xhygibdj6cgkpj2ih1jgx14">
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="259" parent="229" name="FKcbcgksvnqvqxrrc4dwv3qys65">
+    <index id="261" parent="229" name="FKcbcgksvnqvqxrrc4dwv3qys65">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="260" parent="229" name="PRIMARY">
+    <key id="262" parent="229" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>credential_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="261" parent="229" name="UK_l7xhygibdj6cgkpj2ih1jgx14">
+    <key id="263" parent="229" name="UK_l7xhygibdj6cgkpj2ih1jgx14">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>UK_l7xhygibdj6cgkpj2ih1jgx14</UnderlyingIndexName>
     </key>
-    <column id="262" parent="230" name="exam_id">
+    <column id="264" parent="230" name="exam_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="230" name="exam_name">
+    <column id="265" parent="230" name="exam_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="230" name="course_id">
+    <column id="266" parent="230" name="course_id">
       <Position>3</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="265" parent="230" name="FKr1qm93flajdaclug2fg8i7bcg">
+    <index id="267" parent="230" name="FKr1qm93flajdaclug2fg8i7bcg">
       <ColNames>course_id</ColNames>
     </index>
-    <key id="266" parent="230" name="PRIMARY">
+    <key id="268" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>exam_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="267" parent="231" name="next_val">
-      <Position>1</Position>
-      <DataType>bigint(20)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="268" parent="232" name="mark_id">
+    <column id="269" parent="231" name="resource_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="232" name="score">
+    <column id="270" parent="231" name="file_type">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="271" parent="231" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="272" parent="231" name="size">
+      <Position>4</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="273" parent="231" name="url">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="274" parent="231" name="uuid">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="275" parent="231" name="course_id">
+      <Position>7</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="276" parent="231" name="FKfwn0k7fjkvv3s1akdb6ixlbv0">
+      <ColNames>course_id</ColNames>
+    </index>
+    <key id="277" parent="231" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>resource_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="278" parent="232" name="next_val">
+      <Position>1</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="279" parent="233" name="mark_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="280" parent="233" name="score">
       <Position>2</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="232" name="exam_id">
+    <column id="281" parent="233" name="exam_id">
       <Position>3</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="232" name="user_id">
+    <column id="282" parent="233" name="user_id">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="272" parent="232" name="FKqsh7nyinh5ntyjr023na0qfaa">
+    <index id="283" parent="233" name="FKqsh7nyinh5ntyjr023na0qfaa">
       <ColNames>exam_id</ColNames>
     </index>
-    <index id="273" parent="232" name="FKexm2itxq6fj3pll51arpieejd">
+    <index id="284" parent="233" name="FKexm2itxq6fj3pll51arpieejd">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="274" parent="232" name="PRIMARY">
+    <key id="285" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>mark_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="275" parent="233" name="role_id">
+    <column id="286" parent="234" name="role_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="233" name="name">
+    <column id="287" parent="234" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="277" parent="233" name="PRIMARY">
+    <key id="288" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>role_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="278" parent="234" name="user_id">
+    <column id="289" parent="235" name="user_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="234" name="email">
+    <column id="290" parent="235" name="role_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="291" parent="235" name="FKhfh9dx7w3ubf1co1vdev94g3f">
+      <ColNames>user_id</ColNames>
+    </index>
+    <index id="292" parent="235" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+      <ColNames>role_id</ColNames>
+    </index>
+    <column id="293" parent="236" name="user_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="294" parent="236" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="234" name="first_name">
+    <column id="295" parent="236" name="first_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="234" name="last_name">
+    <column id="296" parent="236" name="last_name">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="234" name="phone">
+    <column id="297" parent="236" name="password">
       <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="298" parent="236" name="phone">
+      <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="283" parent="234" name="UK_6dotkott2kjsp8vw4d0m25fb7">
+    <index id="299" parent="236" name="UK_6dotkott2kjsp8vw4d0m25fb7">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="284" parent="234" name="PRIMARY">
+    <key id="300" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="285" parent="234" name="UK_6dotkott2kjsp8vw4d0m25fb7">
+    <key id="301" parent="236" name="UK_6dotkott2kjsp8vw4d0m25fb7">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UK_6dotkott2kjsp8vw4d0m25fb7</UnderlyingIndexName>
     </key>
