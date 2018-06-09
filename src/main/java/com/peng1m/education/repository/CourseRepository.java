@@ -19,6 +19,7 @@ public interface CourseRepository extends PagingAndSortingRepository<Course, Lon
     /**
      * Find course by course code
      * Example usage: api/courses/search/findByCourseCode?code=CS303
+     *
      * @param courseCode code
      * @return Course
      */

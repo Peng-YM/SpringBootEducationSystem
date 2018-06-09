@@ -2,11 +2,13 @@ package com.peng1m.education.repository;
 
 import com.peng1m.education.model.User;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -20,6 +22,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     /**
      * Find user by email
      * example usage: GET /users/search/findByEmail?email=someone@somewhere.com
+     *
      * @param email user's email
      * @return User
      */
@@ -28,13 +31,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
     /**
      * Only admin and the user himself can create/update user.
      *
-     * @param profile user profile
-     * @param <S>     subtype
+     * @param user user
+     * @param <S>  subtype
      * @return User
      */
-    @PreAuthorize("hasRole('ADMIN') or #profile.credential.username == principal.username")
+    @PreAuthorize("hasRole('ADMIN') or #user.email == principal.username")
     @Override
-    <S extends User> S save(S profile);
+    <S extends User> S save(S user);
 
     /**
      * Only admin and the user himself can access profile

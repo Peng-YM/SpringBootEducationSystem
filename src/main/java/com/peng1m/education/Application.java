@@ -3,18 +3,11 @@ package com.peng1m.education;
 import com.peng1m.education.config.FileStorageProperties;
 import com.peng1m.education.config.SecurityUtils;
 import com.peng1m.education.model.*;
-import com.peng1m.education.repository.CourseRepository;
-import com.peng1m.education.repository.ExamRepository;
-import com.peng1m.education.repository.MarkRepository;
-import com.peng1m.education.repository.UserRepository;
-import com.peng1m.education.repository.internal.CredentialRepository;
-import com.peng1m.education.repository.internal.RoleRepository;
+import com.peng1m.education.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
@@ -33,8 +26,6 @@ public class Application {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private CredentialRepository credentialRepository;
-    @Autowired
     private ExamRepository examRepository;
     @Autowired
     private MarkRepository markRepository;
@@ -49,44 +40,34 @@ public class Application {
      * Only for debug usage, insert sample data, will be deleted on production!
      * If you don't want to create sample data, comment the @PostConstruct annotation
      */
-    @PostConstruct
+//    @PostConstruct
     public void init() {
-        SecurityUtils.runAs("system", "system", "ROLE_USER", "ROLE_ADMIN");
+        SecurityUtils.runAsAdmin();
         userRepository.deleteAll();
         courseRepository.deleteAll();
         roleRepository.deleteAll();
-        credentialRepository.deleteAll();
         examRepository.deleteAll();
         markRepository.deleteAll();
 
         Role userRole = roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.save(new Role("ROLE_ADMIN"));
 
-        Credential credential = credentialRepository.save(new Credential(
-                "pengym@qq.com",
-                encoder.encode("123456"),
-                Arrays.asList(userRole, adminRole)
-        ));
         User user = userRepository.save(new User(
                 "pengym@qq.com",
+                encoder.encode("123456"),
                 "YM",
                 "Peng",
                 "12345678901",
-                credential
-        ));
-
-        Credential credential1 = credentialRepository.save(new Credential(
-                "wang@qq.com",
-                encoder.encode("123456"),
-                Arrays.asList(userRole)
+                Arrays.asList(userRole, adminRole)
         ));
 
         User user1 = new User(
                 "wang@qq.com",
+                encoder.encode("123456"),
                 "GY",
                 "Wang",
                 "12345678901",
-                credential1
+                Arrays.asList(userRole)
         );
         userRepository.save(user1);
 
@@ -115,6 +96,6 @@ public class Application {
                 )
         );
         System.out.println(user.toString());
-        SecurityContextHolder.clearContext();
+        SecurityUtils.clear();
     }
 }

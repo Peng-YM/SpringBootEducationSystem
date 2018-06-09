@@ -1,6 +1,5 @@
 package com.peng1m.education.controller;
 
-import com.google.common.collect.Lists;
 import com.peng1m.education.model.FileResource;
 import com.peng1m.education.service.FileStorageService;
 import org.slf4j.Logger;
@@ -29,11 +28,12 @@ public class FileController {
 
     /**
      * Upload file to server
+     *
      * @param file file
      * @return FileResource
      */
     @PostMapping("api/uploadFile")
-    public FileResource uploadFile(@RequestParam("file")MultipartFile file){
+    public FileResource uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             String uuid = UUID.randomUUID().toString();
             String fileName = file.getName();
@@ -41,7 +41,7 @@ public class FileController {
             String downloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/download/").path(uuid).toUriString();
             return new FileResource(
-                   uuid, fileName, downloadUri, file.getContentType(), file.getSize()
+                    uuid, fileName, downloadUri, file.getContentType(), file.getSize()
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,11 +51,12 @@ public class FileController {
 
     /**
      * Upload multiple files at single request
+     *
      * @param files multiple files
      * @return List of FileResource
      */
     @PostMapping("api/uploadMultiples")
-    public List<FileResource> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
+    public List<FileResource> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.stream(files)
                 .map(this::uploadFile)
                 .collect(Collectors.toList());
@@ -63,7 +64,8 @@ public class FileController {
 
     /**
      * Download file from server
-     * @param uuid uuid of file
+     *
+     * @param uuid    uuid of file
      * @param request request
      * @return Resource
      */
@@ -74,11 +76,11 @@ public class FileController {
         String contentType = null;
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        }catch (IOException e){
+        } catch (IOException e) {
             LOGGER.info("Could not determine file type.");
         }
         // Fall back to default type if type cannot be determined
-        if (contentType == null){
+        if (contentType == null) {
             contentType = "application/octet-stream";
         }
         String header = String.format("attachment; file=%s", resource.getFilename());

@@ -18,6 +18,7 @@ import java.util.Optional;
 public interface MarkRepository extends PagingAndSortingRepository<Mark, Long> {
     /**
      * Only allow admin and student himself to check the score.
+     *
      * @param mark_id mark_id
      * @return Mark
      */

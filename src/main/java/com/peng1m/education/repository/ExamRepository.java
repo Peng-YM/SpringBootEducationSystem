@@ -3,12 +3,8 @@ package com.peng1m.education.repository;
 import com.peng1m.education.model.Exam;
 import io.swagger.annotations.Api;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import java.util.Optional;
 
 @Api(tags = {"exams"})
 @RepositoryRestResource(
@@ -18,7 +14,8 @@ import java.util.Optional;
 public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
     /**
      * Only allows admin to edit exam info
-     * @param s exam
+     *
+     * @param s   exam
      * @param <S> Exam
      * @return Exam object
      */
@@ -28,6 +25,7 @@ public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
 
     /**
      * Only allow admin to delete exam
+     *
      * @param id
      */
     @PreAuthorize("hasRole('ADMIN')")

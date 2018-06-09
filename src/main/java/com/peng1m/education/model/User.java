@@ -2,7 +2,9 @@ package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.peng1m.education.repository.UserListener;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,12 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Data
+@NoArgsConstructor
+@ToString
+
 @Entity
 @Table(name = "users")
-@ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
@@ -27,13 +32,24 @@ public class User {
     @Email
     @Column(unique = true)
     private String email;
+
+    /**
+     * Password should longer than 3 characters and shorter than 12
+     */
+    @NotNull
+    private String password;
+
     private String firstName;
     private String lastName;
     private String phone;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JsonIgnore
-    private Credential credential;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    )
+    private Collection<Role> roles;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
@@ -55,25 +71,23 @@ public class User {
     @RestResource(path = "teaching")
     private Collection<Course> teachingCourses;
 
-    public User() {
-    }
-
-    public User(String email, String firstName, String lastName, String phone, Credential credential) {
+    public User(@NotNull @Email String email, @NotNull @Size(min = 3, max = 12) String password, String firstName, String lastName, String phone, Collection<Role> roles) {
         this.email = email;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.credential = credential;
+        this.roles = roles;
     }
 
     @Transactional
-    public Credential getCredential() {
-        return credential;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Transactional
-    public void setCredential(Credential credential) {
-        this.credential = credential;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
     @Transactional
@@ -82,17 +96,7 @@ public class User {
     }
 
     @Transactional
-    public void setLearningCourses(Collection<Course> learningCourses) {
-        this.learningCourses = learningCourses;
-    }
-
-    @Transactional
     public Collection<Course> getTeachingCourses() {
         return teachingCourses;
-    }
-
-    @Transactional
-    public void setTeachingCourses(Collection<Course> teachingCourses) {
-        this.teachingCourses = teachingCourses;
     }
 }

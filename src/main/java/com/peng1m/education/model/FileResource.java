@@ -59,7 +59,7 @@ public class FileResource {
      * Example Usage:
      * curl -u pengym@qq.com:123456 -i -X PUT -H "Content-Type: text/uri-list" -d "http://localhost:8080/api/courses/58" http://localhost:8080/api/resources/62/course
      * will add resource id 62 to course id 58
-     *
+     * <p>
      * If you want to delete a resource from a course, Use DELETE
      * Example Usage
      * curl -u pengym@qq.com:123456 -i -X DELETE http://localhost:8080/api/resource/62/course
