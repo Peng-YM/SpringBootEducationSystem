@@ -40,7 +40,7 @@ public class Application {
      * Only for debug usage, insert sample data, will be deleted on production!
      * If you don't want to create sample data, comment the @PostConstruct annotation
      */
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         SecurityUtils.runAsAdmin();
         userRepository.deleteAll();
@@ -51,6 +51,7 @@ public class Application {
 
         Role userRole = roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.save(new Role("ROLE_ADMIN"));
+        Role teacherRole = roleRepository.save(new Role("ROLE_TEACHER"));
 
         User user = userRepository.save(new User(
                 "pengym@qq.com",
@@ -58,8 +59,10 @@ public class Application {
                 "YM",
                 "Peng",
                 "12345678901",
-                Arrays.asList(userRole, adminRole)
+                Arrays.asList(userRole, adminRole, teacherRole)
         ));
+
+        userRepository.save(user);
 
         User user1 = new User(
                 "wang@qq.com",
@@ -67,7 +70,7 @@ public class Application {
                 "GY",
                 "Wang",
                 "12345678901",
-                Arrays.asList(userRole)
+                Arrays.asList(userRole, teacherRole)
         );
         userRepository.save(user1);
 

@@ -14,7 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
         collectionResourceRel = "courses",
         path = "courses")
 @Api(tags = {"courses"})
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+@PreAuthorize("hasAnyRole('USER', 'ADMIN', 'TEACHER')")
 public interface CourseRepository extends PagingAndSortingRepository<Course, Long> {
     /**
      * Find course by course code

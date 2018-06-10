@@ -26,6 +26,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @param email user's email
      * @return User
      */
+    @PreAuthorize("hasAnyRole('TEACHER', 'ADMIN') or #email == principal.username")
     Optional<User> findByEmail(@Param("email") String email);
 
     /**
@@ -45,7 +46,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @param id
      * @return null or user object
      */
-    @PostAuthorize("hasRole('ADMIN') or returnObject.get().userId == #id")
+    @PostAuthorize("hasAnyRole('ADMIN', 'TEACHER') or returnObject.get().userId == #id")
     @Override
     Optional<User> findById(@Param("id") Long id);
 
@@ -63,7 +64,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
      *
      * @return List of users
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @Override
     Iterable<User> findAll();
 }

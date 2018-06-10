@@ -14,7 +14,6 @@ import java.util.Optional;
         collectionResourceRel = "marks",
         path = "marks"
 )
-@PreAuthorize("hasRole('ADMIN')")
 public interface MarkRepository extends PagingAndSortingRepository<Mark, Long> {
     /**
      * Only allow admin and student himself to check the score.
@@ -22,7 +21,7 @@ public interface MarkRepository extends PagingAndSortingRepository<Mark, Long> {
      * @param mark_id mark_id
      * @return Mark
      */
-    @PostAuthorize("hasRole('ADMIN') or returnObject.get().student.credential.username == principal.username")
+    @PostAuthorize("hasAnyRole('ADMIN', 'TEACHER') or returnObject.get().student.email == principal.username")
     @Override
     Optional<Mark> findById(Long mark_id);
 }

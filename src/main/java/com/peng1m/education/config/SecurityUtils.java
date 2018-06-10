@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 
 public class SecurityUtils {
     public static void runAsAdmin() {
-        runAs("system", "system", "ROLE_USER", "ROLE_ADMIN");
+        runAs("system", "system", "ROLE_USER", "ROLE_ADMIN", "ROLE_TEACHER");
     }
 
     public static void runAs(String username, String password, String... roles) {

@@ -2,7 +2,6 @@ package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.peng1m.education.repository.UserListener;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -43,7 +42,7 @@ public class User {
     private String lastName;
     private String phone;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
