@@ -130,7 +130,7 @@ Take `users` resource as an example:
    GET http://localhost:8080/api/users?page=0&size=10
    ```
 
-5. **==GET with search parameter:==**
+5. **GET with search parameter**
 
    <u>Not all the resource support search parameters:</u>
 
@@ -159,7 +159,7 @@ Take `users` resource as an example:
    }
    ```
 
-6. **==GET subresource==**
+6. **GET subresource**
 
    get user with id 58's learning courses:
 
