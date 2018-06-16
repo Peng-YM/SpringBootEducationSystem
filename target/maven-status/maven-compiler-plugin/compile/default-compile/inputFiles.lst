@@ -1,10 +1,10 @@
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/ExamRepository.java
+/Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/internal/UserRepo.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/UserRepository.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/service/UserService.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/model/Role.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/config/FileStorageProperties.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/model/User.java
-/Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/internal/CredentialRepository.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/Application.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/CourseRepository.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/ResourceRepository.java
@@ -17,6 +17,7 @@
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/MarkRepository.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/config/SecurityUtils.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/service/FileStorageService.java
-/Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/internal/RoleRepository.java
+/Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/RoleRepository.java
+/Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/handlers/UserEventHandler.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/controller/FileController.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/model/Credential.java
