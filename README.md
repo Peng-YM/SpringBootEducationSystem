@@ -57,7 +57,7 @@ Education System based on SpringBoot and REST
 
 ## 3. API documentation
 
-### Summary
+### 3.1 Summary
 
 This project use well formatted HAL JSON as response, you can quickly understand them with HAL browser.
 
@@ -223,7 +223,7 @@ Take `users` resource as an example:
      -H "Content-Type:text/uri-list" http://localhost:8080/api/users/58/learning
    ```
 
-### API Security
+### 3.3 API Security
 
 There are 3 levels of users in this application: **Admin** > **Teacher** > **User**
 
