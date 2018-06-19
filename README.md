@@ -238,7 +238,7 @@ Admin was granted authority to access all api, while Teacher and User only have 
 |   **exams**   | **√** |           **√**           |    **√**    |
 | **resources** | **√** |           **√**           |    **√**    |
 |  **courses**  | **√** |           **√**           |    **√**    |
-|   **marks**   | **√** |           **√**           |    **√**    |
+|   **marks**   | **√** |           **√**           |    Get himself    |
 
 ## LICENSE
 
