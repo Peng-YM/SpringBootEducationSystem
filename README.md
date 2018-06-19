@@ -13,7 +13,7 @@ Education System based on SpringBoot and REST
 
 1. Maven
 2. JDK-8(not compatible with JDK-9)
-### 1.2 Configure MySQL database
+### 1.2 Configuration
 
 1. Create Database
 
@@ -31,7 +31,6 @@ Education System based on SpringBoot and REST
        username: root
        password: 123456
    ```
-
 3. Start server
 
    ```
