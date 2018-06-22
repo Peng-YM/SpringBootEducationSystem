@@ -36,7 +36,7 @@ public class User {
      */
     @NotNull
     private String password;
-
+    private String avatar;
     private String firstName;
     private String lastName;
     private String phone;
@@ -72,6 +72,7 @@ public class User {
     public User(@NotNull @Email String email, @NotNull @Size(min = 3, max = 12) String password, String firstName, String lastName, String phone, Collection<Role> roles) {
         this.email = email;
         this.password = password;
+        this.avatar = "https://avatars2.githubusercontent.com/u/21050064?s=460&v=4";
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;

@@ -72,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("REQUEST");
         config.addAllowedMethod("PATCH");
         config.addExposedHeader("Location");
 

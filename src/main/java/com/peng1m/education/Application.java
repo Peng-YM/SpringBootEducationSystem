@@ -41,7 +41,7 @@ public class Application {
      * Only for debug usage, insert sample data, will be deleted on production!
      * If you don't want to create sample data, comment the @PostConstruct annotation
      */
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         SecurityUtils.runAsAdmin();
         userRepository.deleteAll();
