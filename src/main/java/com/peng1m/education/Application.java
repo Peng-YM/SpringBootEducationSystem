@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.Date;
 
 
 @SpringBootApplication
@@ -40,7 +41,7 @@ public class Application {
      * Only for debug usage, insert sample data, will be deleted on production!
      * If you don't want to create sample data, comment the @PostConstruct annotation
      */
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         SecurityUtils.runAsAdmin();
         userRepository.deleteAll();
@@ -86,7 +87,7 @@ public class Application {
                 Arrays.asList(user1)
         );
         courseRepository.save(course);
-        Exam exam = examRepository.save(new Exam(course, "Mid-term"));
+        Exam exam = examRepository.save(new Exam(course, "Mid-term", new Date()));
         Mark userMark = markRepository.save(
                 new Mark(
                         user, exam, 100

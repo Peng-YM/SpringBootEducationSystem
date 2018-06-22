@@ -1,6 +1,7 @@
 package com.peng1m.education.repository.handlers;
 
 import com.peng1m.education.model.User;
+import com.peng1m.education.repository.RoleRepository;
 import com.peng1m.education.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
@@ -16,6 +17,8 @@ public class UserEventHandler {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     /**
      * Encrypt User's password before save it into database

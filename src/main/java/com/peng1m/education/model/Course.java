@@ -1,6 +1,5 @@
 package com.peng1m.education.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
@@ -36,7 +35,6 @@ public class Course {
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     )
-    @JsonIgnore
     private Collection<User> teachers;
 
     /**
@@ -48,12 +46,13 @@ public class Course {
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     )
-    @JsonIgnore
     private Collection<User> students;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JsonIgnore
     private Collection<FileResource> resources;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private Collection<Exam> exams;
 
     public Course() {
     }
@@ -82,5 +81,15 @@ public class Course {
     @Transactional
     public void setStudents(Collection<User> students) {
         this.students = students;
+    }
+
+    @Transactional
+    public void setExams(Collection<Exam> exams){
+        this.exams = exams;
+    }
+
+    @Transactional
+    public Collection<Exam> getExams(){
+        return exams;
     }
 }

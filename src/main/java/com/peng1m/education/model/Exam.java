@@ -1,11 +1,11 @@
 package com.peng1m.education.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.ToString;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "exams")
@@ -20,18 +20,21 @@ public class Exam {
     // one to one
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id")
-    @JsonIgnore
     private Course course;
 
     @Column(name = "exam_name")
     private String examName;
 
+    @Column(name = "date")
+    private Date date;
+
     public Exam() {
     }
 
-    public Exam(Course course, String examName) {
+    public Exam(Course course, String examName, Date date) {
         this.course = course;
         this.examName = examName;
+        this.date = date;
     }
 
     public Long getExamId() {

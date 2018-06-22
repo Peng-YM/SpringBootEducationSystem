@@ -17,7 +17,6 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @ToString
-
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
