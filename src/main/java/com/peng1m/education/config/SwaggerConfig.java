@@ -29,7 +29,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         Tag markTag = new Tag("exam", "repository for Mark");
         return new Docket(DocumentationType.SWAGGER_2)
                 .tags(userTag, courseTag, examTag, markTag)
-                .pathMapping("/api")
+                .pathMapping("/")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.peng1m.education.repository"))
                 .paths(PathSelectors.any())

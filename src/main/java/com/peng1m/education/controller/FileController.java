@@ -32,7 +32,7 @@ public class FileController {
      * @param file file
      * @return FileResource
      */
-    @PostMapping("api/uploadFile")
+    @PostMapping("uploadFile")
     public FileResource uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             String uuid = UUID.randomUUID().toString();
@@ -55,7 +55,7 @@ public class FileController {
      * @param files multiple files
      * @return List of FileResource
      */
-    @PostMapping("api/uploadMultiples")
+    @PostMapping("uploadMultiples")
     public List<FileResource> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.stream(files)
                 .map(this::uploadFile)
@@ -69,7 +69,7 @@ public class FileController {
      * @param request request
      * @return Resource
      */
-    @GetMapping("api/download/{uuid:.+}")
+    @GetMapping("download/{uuid:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String uuid, HttpServletRequest request) throws Exception {
         // Load file as resource
         Resource resource = fileStorageService.loadFileAsResource(uuid);

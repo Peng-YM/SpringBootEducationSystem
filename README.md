@@ -51,7 +51,7 @@ Table of Contents
     $ mvn spring-boot:run
    ```
 
-    Then open the address http://localhost:8080/api to open the HAL browser.
+    Then open the address http://localhost:8080 to open the HAL browser.
 
     ![332DE30D-8F1F-428B-B736-5BCBE38669E6](https://ws3.sinaimg.cn/large/006tNc79gy1fscyjj5wclj31g10teahf.jpg)
 
@@ -112,13 +112,13 @@ Take `users` resource as an example:
 1. **GET all the users**
 
    ```http
-   GET http://localhost:8080/api/users
+   GET http://localhost:8080/users
    ```
 
 2. **GET user by id**
 
    ```http
-   GET http://localhost:8080/api/users/58
+   GET http://localhost:8080/users/58
    ```
 
 3. **GET with sorting**
@@ -126,13 +126,13 @@ Take `users` resource as an example:
    Ascending with `email`
 
    ```http
-   GET http://localhost:8080/api/users?sort=email
+   GET http://localhost:8080/users?sort=email
    ```
 
    Decending with `email`:
 
    ```http
-   GET http://localhost:8080/api/users?sort=-email
+   GET http://localhost:8080/users?sort=-email
    ```
 
 4. **GET with paging**
@@ -140,7 +140,7 @@ Take `users` resource as an example:
    `page`specify the page number. `size` specify the number of resource in one page.
 
    ```http
-   GET http://localhost:8080/api/users?page=0&size=10
+   GET http://localhost:8080/users?page=0&size=10
    ```
 
 5. **GET with search parameter**
@@ -148,12 +148,12 @@ Take `users` resource as an example:
    <u>Not all the resource support search parameters:</u>
 
    ```http
-   GET http://localhost:8080/api/users/search/findByEmail?email=pengym@qq.com
+   GET http://localhost:8080/users/search/findByEmail?email=pengym@qq.com
    ```
    To find out all avaliable search parameter under `users` resource:
 
    ```http
-   GET http://localhost:8080/api/users/search/
+   GET http://localhost:8080/users/search/
    ```
 
    The response body should be:
@@ -162,11 +162,11 @@ Take `users` resource as an example:
    {
      "_links": {
        "findByEmail": {
-         "href": "http://69.171.71.251:8080/api/users/search/findByEmail{?email}",
+         "href": "http://69.171.71.251:8080/users/search/findByEmail{?email}",
          "templated": true
        },
        "self": {
-         "href": "http://69.171.71.251:8080/api/users/search/"
+         "href": "http://69.171.71.251:8080/users/search/"
        }
      }
    }
@@ -177,7 +177,7 @@ Take `users` resource as an example:
    get user with id 58's learning courses:
 
    ```http
-   GET http://localhost:8080/api/users/58/learning
+   GET http://localhost:8080/users/58/learning
    ```
 
 7. **Create user**
@@ -225,7 +225,7 @@ Take `users` resource as an example:
 9. **Delete a user**
 
    ```http
-   DELETE http://localhost:8080/api/users/58
+   DELETE http://localhost:8080/users/58
    ```
 
 10. **==Update Subresource==**
@@ -234,7 +234,7 @@ Take `users` resource as an example:
 
    ```shell
    $ curl -i -X PUT -d "http://localhost:8080/courses/59"
-     -H "Content-Type:text/uri-list" http://localhost:8080/api/users/58/learning
+     -H "Content-Type:text/uri-list" http://localhost:8080/users/58/learning
    ```
 
 ### 3.3 API Security
