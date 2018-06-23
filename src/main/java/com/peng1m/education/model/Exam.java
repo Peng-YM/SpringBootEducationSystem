@@ -1,6 +1,8 @@
 package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.peng1m.education.repository.serializers.JsonDateSerializer;
 import lombok.ToString;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +29,10 @@ public class Exam {
     private String examName;
 
     @Column(name = "date")
+    @JsonSerialize(using=JsonDateSerializer.class)
     private Date date;
 
-    public Exam() {
-    }
+    public Exam() {}
 
     public Exam(Course course, String examName, Date date) {
         this.course = course;

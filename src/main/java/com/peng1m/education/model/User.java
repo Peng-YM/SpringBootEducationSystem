@@ -56,7 +56,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     )
     @JsonIgnore
-    @RestResource(path = "learning")
     private Collection<Course> learningCourses;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -66,7 +65,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     )
     @JsonIgnore
-    @RestResource(path = "teaching")
     private Collection<Course> teachingCourses;
 
     public User(@NotNull @Email String email, @NotNull @Size(min = 3, max = 12) String password, String firstName, String lastName, String phone, Collection<Role> roles) {
