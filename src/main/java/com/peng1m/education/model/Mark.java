@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -45,6 +46,11 @@ public class Mark {
         this.student = student;
         this.exam = exam;
         this.score = score;
+    }
+
+    @RestResource
+    public long getId(){
+        return markId;
     }
 
 

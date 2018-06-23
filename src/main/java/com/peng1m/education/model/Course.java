@@ -3,9 +3,12 @@ package com.peng1m.education.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Data
@@ -24,6 +27,8 @@ public class Course {
 
     @Column(name = "course_name")
     private String courseName;
+
+    @Column(name = "description", columnDefinition = "varchar(50000)")
     private String description;
 
     /**
@@ -92,4 +97,10 @@ public class Course {
     public Collection<Exam> getExams(){
         return exams;
     }
+
+    @RestResource
+    public long getId(){
+        return courseId;
+    }
+
 }

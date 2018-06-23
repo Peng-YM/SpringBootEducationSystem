@@ -98,4 +98,9 @@ public class User {
     public Collection<Course> getTeachingCourses() {
         return teachingCourses;
     }
+
+    @RestResource
+    public long getId(){
+        return userId;
+    }
 }

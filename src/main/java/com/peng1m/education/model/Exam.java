@@ -2,6 +2,7 @@ package com.peng1m.education.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.ToString;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -61,5 +62,15 @@ public class Exam {
 
     public void setExamName(String examName) {
         this.examName = examName;
+    }
+
+    @RestResource
+    public long getId(){
+        return examId;
+    }
+
+    @RestResource
+    public long getCourseId(){
+        return this.course.getCourseId();
     }
 }

@@ -88,6 +88,7 @@ public class Application {
         );
         courseRepository.save(course);
         Exam exam = examRepository.save(new Exam(course, "Mid-term", new Date()));
+        Exam exam2 = examRepository.save(new Exam(course, "Final", new Date()));
         Mark userMark = markRepository.save(
                 new Mark(
                         user, exam, 100
