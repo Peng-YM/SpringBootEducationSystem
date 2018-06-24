@@ -10,7 +10,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RepositoryRestResource(
         collectionResourceRel = "exams",
         path = "exams")
-@PreAuthorize("hasRole('USER')")
 public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
     /**
      * Only allows admin to edit exam info

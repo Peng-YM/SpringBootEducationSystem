@@ -2,6 +2,7 @@ package com.peng1m.education.model;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 
@@ -23,4 +24,8 @@ public class Role {
         this.name = name;
     }
 
+    @RestResource
+    public long getId(){
+        return roleId;
+    }
 }

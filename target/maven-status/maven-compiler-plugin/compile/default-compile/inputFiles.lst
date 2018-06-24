@@ -20,4 +20,5 @@
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/RoleRepository.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/handlers/UserEventHandler.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/controller/FileController.java
+/Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/repository/serializers/JsonDateSerializer.java
 /Users/pengym/Downloads/educationsystem/src/main/java/com/peng1m/education/model/Credential.java

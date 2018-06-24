@@ -15,7 +15,6 @@ import java.util.Optional;
         collectionResourceRel = "users",
         path = "users"
 )
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     /**
      * Find user by email
