@@ -22,24 +22,26 @@ public class UserEventHandler {
 
     /**
      * Encrypt User's password before save it into database
+     *
      * @param user new user
      */
     @HandleBeforeCreate
-    public void handleUserCreate(User user){
+    public void handleUserCreate(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
     /**
      * Encrypt User's password before update his password
+     *
      * @param user user to update
      */
     @HandleBeforeSave
-    public void handleUserSave(User user){
-        if (user.getPassword() == null || user.getPassword().trim().length() == 0){
+    public void handleUserSave(User user) {
+        if (user.getPassword() == null || user.getPassword().trim().length() == 0) {
             // the password field is not updated
             User storedUser = userRepository.findById(user.getUserId()).get();
             storedUser.setPassword(storedUser.getPassword());
-        }else{
+        } else {
             // password is changed in request
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }

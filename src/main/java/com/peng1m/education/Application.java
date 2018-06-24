@@ -57,10 +57,11 @@ public class Application {
         User user = userRepository.save(new User(
                 "pengym@qq.com",
                 encoder.encode("123456"),
+                "https://ws1.sinaimg.cn/large/c2dfc71dly1fsm6d1upisj20cs0csdg5.jpg",
                 "YM",
                 "Peng",
                 "12345678901",
-                Arrays.asList(userRole, adminRole, teacherRole)
+                Arrays.asList(adminRole, teacherRole)
         ));
 
         userRepository.save(user);
@@ -68,10 +69,11 @@ public class Application {
         User user1 = new User(
                 "wang@qq.com",
                 encoder.encode("123456"),
+                "https://ws1.sinaimg.cn/large/c2dfc71dly1fsm6d1upisj20cs0csdg5.jpg",
                 "GY",
                 "Wang",
                 "12345678901",
-                Arrays.asList(userRole, teacherRole)
+                Arrays.asList(userRole)
         );
         userRepository.save(user1);
 
@@ -80,11 +82,8 @@ public class Application {
                 "Data Structure and Algorithm",
                 "Data Structure and Algorithm"
         ));
-        course.setTeachers(
-                Arrays.asList(user)
-        );
-        course.setStudents(
-                Arrays.asList(user1)
+        course.setUsers(
+                Arrays.asList(user, user1)
         );
         courseRepository.save(course);
         Exam exam = examRepository.save(new Exam(course, "Mid-term", new Date()));

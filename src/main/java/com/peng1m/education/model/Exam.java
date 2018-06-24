@@ -29,10 +29,11 @@ public class Exam {
     private String examName;
 
     @Column(name = "date")
-    @JsonSerialize(using=JsonDateSerializer.class)
+    @JsonSerialize(using = JsonDateSerializer.class)
     private Date date;
 
-    public Exam() {}
+    public Exam() {
+    }
 
     public Exam(Course course, String examName, Date date) {
         this.course = course;
@@ -67,12 +68,7 @@ public class Exam {
     }
 
     @RestResource
-    public long getId(){
+    public long getId() {
         return examId;
-    }
-
-    @RestResource
-    public long getCourseId(){
-        return this.course.getCourseId();
     }
 }

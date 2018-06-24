@@ -49,7 +49,7 @@ public class Mark {
     }
 
     @RestResource
-    public long getId(){
+    public long getId() {
         return markId;
     }
 

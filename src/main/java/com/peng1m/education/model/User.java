@@ -1,6 +1,5 @@
 package com.peng1m.education.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,9 +30,6 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    /**
-     * Password should longer than 3 characters and shorter than 12
-     */
     @NotNull
     private String password;
     private String avatar;
@@ -51,34 +47,19 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "course_students",
+            name = "course_users",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     )
-    @JsonIgnore
-    private Collection<Course> learningCourses;
+    private Collection<Course> courses;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "course_teachers",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-    )
-    @JsonIgnore
-    private Collection<Course> teachingCourses;
-
-    public User(@NotNull @Email String email, @NotNull @Size(min = 3, max = 12) String password, String firstName, String lastName, String phone, Collection<Role> roles) {
+    public User(@NotNull @Email String email, @NotNull @Size(min = 3, max = 12) String password, String avatar, String firstName, String lastName, String phone, Collection<Role> roles) {
         this.email = email;
         this.password = password;
-        this.avatar = "https://avatars2.githubusercontent.com/u/21050064?s=460&v=4";
+        this.avatar = avatar;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.roles = roles;
-    }
-
-    @Transactional
-    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
 
@@ -88,17 +69,22 @@ public class User {
     }
 
     @Transactional
-    public Collection<Course> getLearningCourses() {
-        return learningCourses;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Transactional
-    public Collection<Course> getTeachingCourses() {
-        return teachingCourses;
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    @Transactional
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
     }
 
     @RestResource
-    public long getId(){
+    public long getId() {
         return userId;
     }
 }

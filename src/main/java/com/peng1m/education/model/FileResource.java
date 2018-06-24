@@ -45,15 +45,6 @@ public class FileResource {
     @NotNull
     @Min(0)
     private long size;
-
-    public FileResource(@NotNull String uuid, @NotNull String name, @NotNull @URL String url, @NotNull String fileType, @NotNull @Min(0) long size) {
-        this.uuid = uuid;
-        this.name = name;
-        this.url = url;
-        this.fileType = fileType;
-        this.size = size;
-    }
-
     /**
      * If you want to add a resource to a course, use PUT method to send text/uri-list content
      * Example Usage:
@@ -68,4 +59,12 @@ public class FileResource {
     @OneToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+    public FileResource(@NotNull String uuid, @NotNull String name, @NotNull @URL String url, @NotNull String fileType, @NotNull @Min(0) long size) {
+        this.uuid = uuid;
+        this.name = name;
+        this.url = url;
+        this.fileType = fileType;
+        this.size = size;
+    }
 }

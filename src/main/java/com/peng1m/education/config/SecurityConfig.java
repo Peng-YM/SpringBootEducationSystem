@@ -30,12 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class)
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/**").authenticated()
-            .anyRequest().permitAll()
-            .and()
-            .httpBasic();
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/**").authenticated()
+                .anyRequest().permitAll()
+                .and()
+                .httpBasic();
     }
 
     @Override
@@ -58,8 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    protected Filter corsFilter()
-    {
+    protected Filter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration config = new CorsConfiguration();
