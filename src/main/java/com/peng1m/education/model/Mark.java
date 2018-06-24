@@ -25,7 +25,7 @@ public class Mark {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private User student;
+    private User user;
 
     /**
      * A mark is corresponding to an exam
@@ -42,8 +42,8 @@ public class Mark {
     public Mark() {
     }
 
-    public Mark(User student, Exam exam, float score) {
-        this.student = student;
+    public Mark(User user, Exam exam, float score) {
+        this.user = user;
         this.exam = exam;
         this.score = score;
     }
@@ -55,13 +55,13 @@ public class Mark {
 
 
     @Transactional
-    public User getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
     @Transactional
-    public void setStudent(User student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Transactional
