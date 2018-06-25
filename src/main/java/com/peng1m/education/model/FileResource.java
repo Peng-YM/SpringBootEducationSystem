@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -56,7 +57,7 @@ public class FileResource {
      * curl -u pengym@qq.com:123456 -i -X DELETE http://localhost:8080/resource/62/course
      * will delete resource id 62 from course id 58
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
 
@@ -66,5 +67,10 @@ public class FileResource {
         this.url = url;
         this.fileType = fileType;
         this.size = size;
+    }
+
+    @RestResource
+    public long getId(){
+        return resourceId;
     }
 }

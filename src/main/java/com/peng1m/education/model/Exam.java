@@ -21,7 +21,7 @@ public class Exam {
     private Long examId;
 
     // one to one
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id")
     private Course course;
 

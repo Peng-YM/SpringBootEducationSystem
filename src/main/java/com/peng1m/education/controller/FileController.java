@@ -1,6 +1,7 @@
 package com.peng1m.education.controller;
 
 import com.peng1m.education.model.FileResource;
+import com.peng1m.education.repository.ResourceRepository;
 import com.peng1m.education.service.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class FileController {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileController.class);
     @Autowired
     private FileStorageService fileStorageService;
+    @Autowired
+    private ResourceRepository resoureRepository;
 
     /**
      * Upload file to server
@@ -40,9 +43,9 @@ public class FileController {
             fileStorageService.storeFile(file, uuid);
             String downloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/download/").path(uuid).toUriString();
-            return new FileResource(
-                    uuid, fileName, downloadUri, file.getContentType(), file.getSize()
-            );
+            FileResource resource =  resoureRepository.save(new FileResource(
+                    uuid, fileName, downloadUri, file.getContentType(), file.getSize()));
+            return resource;
         } catch (Exception e) {
             e.printStackTrace();
         }
