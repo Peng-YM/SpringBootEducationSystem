@@ -2,6 +2,9 @@ package com.peng1m.education.repository;
 
 import com.peng1m.education.model.User;
 import io.swagger.annotations.Api;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -15,6 +18,7 @@ import java.util.Optional;
         collectionResourceRel = "users",
         path = "users"
 )
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     /**
      * Find user by email
@@ -23,7 +27,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      * @param email user's email
      * @return User
      */
-    @PreAuthorize("hasAnyRole('TEACHER', 'ADMIN') or #email == principal.username")
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN') or #email == principal.username")
     Optional<User> findByEmail(@Param("email") String email);
 
     /**
@@ -33,7 +37,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      * @param <S>  subtype
      * @return User
      */
-    @PreAuthorize("hasRole('ADMIN') or #user.email == principal.username")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or #user.email == principal.username")
     @Override
     <S extends User> S save(S user);
 
@@ -43,16 +47,18 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      * @param id
      * @return null or user object
      */
-    @PostAuthorize("hasAnyRole('ADMIN', 'TEACHER') or returnObject.get().userId == #id")
+    @PostAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER') or returnObject.get().userId == #id")
     @Override
     Optional<User> findById(@Param("id") Long id);
+
+
 
     /**
      * Only admin can delete user
      *
      * @param id userId
      */
-    @PostAuthorize("hasRole('ADMIN')")
+    @PostAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     void deleteById(Long id);
 
@@ -61,7 +67,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      *
      * @return List of users
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @Override
-    Iterable<User> findAll();
+    Iterable<User> findAll(Sort sort);
 }

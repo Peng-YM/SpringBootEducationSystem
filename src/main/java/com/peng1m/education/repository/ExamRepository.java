@@ -18,7 +18,7 @@ public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
      * @param <S> Exam
      * @return Exam object
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @Override
     <S extends Exam> S save(S s);
 
@@ -27,7 +27,7 @@ public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
      *
      * @param id
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @Override
     void deleteById(Long id);
 }

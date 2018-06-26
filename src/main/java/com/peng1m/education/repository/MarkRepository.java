@@ -20,7 +20,7 @@ public interface MarkRepository extends PagingAndSortingRepository<Mark, Long> {
      * @param mark_id mark_id
      * @return Mark
      */
-    @PostAuthorize("hasAnyRole('ADMIN', 'TEACHER') or returnObject.get().student.email == principal.username")
+    @PostAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER') or returnObject.get().student.email == principal.username")
     @Override
     Optional<Mark> findById(Long mark_id);
 }

@@ -99,7 +99,6 @@ public class Application {
                         user1, exam, 100
                 )
         );
-        System.out.println(user.toString());
         SecurityUtils.clear();
     }
 }

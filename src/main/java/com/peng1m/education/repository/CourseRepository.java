@@ -31,7 +31,7 @@ public interface CourseRepository extends PagingAndSortingRepository<Course, Lon
      * @param <S> Course class
      * @return Course
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @Override
     <S extends Course> S save(S s);
 
@@ -40,7 +40,7 @@ public interface CourseRepository extends PagingAndSortingRepository<Course, Lon
      *
      * @param aLong
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @Override
     void deleteById(Long aLong);
 }

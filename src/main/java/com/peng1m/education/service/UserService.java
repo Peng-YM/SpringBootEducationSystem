@@ -37,6 +37,7 @@ public class UserService implements UserDetailsService {
             LOGGER.debug("User: {} login failed!", email);
             throw new UsernameNotFoundException("Invalid username or password");
         }
+        LOGGER.debug(user.getRoles().toString());
         return new org.springframework.security.core.userdetails.User
                 (user.getEmail(), user.getPassword(),
                         mapRolesToAuthorities(user.getRoles()));
