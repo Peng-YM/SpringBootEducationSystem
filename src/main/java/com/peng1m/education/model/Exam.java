@@ -3,6 +3,7 @@ package com.peng1m.education.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.peng1m.education.repository.serializers.JsonDateSerializer;
+import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name = "exams")
 @ToString
@@ -32,21 +34,17 @@ public class Exam {
     @JsonSerialize(using = JsonDateSerializer.class)
     private Date date;
 
+    @Column(name = "description")
+    private String description;
+
     public Exam() {
     }
 
-    public Exam(Course course, String examName, Date date) {
+    public Exam(Course course, String examName, Date date, String description) {
         this.course = course;
         this.examName = examName;
         this.date = date;
-    }
-
-    public Long getExamId() {
-        return examId;
-    }
-
-    public void setExamId(Long examId) {
-        this.examId = examId;
+        this.description = description;
     }
 
     @Transactional
@@ -57,14 +55,6 @@ public class Exam {
     @Transactional
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public String getExamName() {
-        return examName;
-    }
-
-    public void setExamName(String examName) {
-        this.examName = examName;
     }
 
     @RestResource

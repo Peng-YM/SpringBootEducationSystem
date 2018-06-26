@@ -86,8 +86,8 @@ public class Application {
                 Arrays.asList(user, user1)
         );
         courseRepository.save(course);
-        Exam exam = examRepository.save(new Exam(course, "Mid-term", new Date()));
-        Exam exam2 = examRepository.save(new Exam(course, "Final", new Date()));
+        Exam exam = examRepository.save(new Exam(course, "Mid-term", new Date(), "Mid-term"));
+        Exam exam2 = examRepository.save(new Exam(course, "Final", new Date(), "Final"));
         Mark userMark = markRepository.save(
                 new Mark(
                         user, exam, 100
