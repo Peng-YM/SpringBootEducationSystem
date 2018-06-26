@@ -1,5 +1,6 @@
 package com.peng1m.education.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,9 @@ public class User {
     private String email;
 
     @NotNull
+    @JsonIgnore
     private String password;
+
     private String avatar;
     private String firstName;
     private String lastName;
