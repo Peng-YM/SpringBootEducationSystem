@@ -25,7 +25,7 @@ public class Role {
     }
 
     @RestResource
-    public long getId(){
+    public long getId() {
         return roleId;
     }
 }

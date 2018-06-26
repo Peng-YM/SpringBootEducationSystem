@@ -44,7 +44,7 @@ public class UserEventHandler {
         if (user.getPassword() == null || user.getPassword().trim().length() == 0) {
             // the password field is not updated
             storedUser.setPassword(storedUser.getPassword());
-        } else if (!storedUser.getPassword().equals(user.getPassword())){
+        } else if (!storedUser.getPassword().equals(user.getPassword())) {
             // password is changed in request
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }

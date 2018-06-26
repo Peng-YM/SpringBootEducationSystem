@@ -70,7 +70,7 @@ public class FileResource {
     }
 
     @RestResource
-    public long getId(){
+    public long getId() {
         return resourceId;
     }
 }

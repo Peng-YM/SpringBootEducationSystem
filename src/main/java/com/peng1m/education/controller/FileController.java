@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,6 +36,7 @@ public class FileController {
      * @param file file
      * @return FileResource
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @PostMapping("uploadFile")
     public FileResource uploadFile(@RequestParam("file") MultipartFile file) {
         try {
@@ -43,7 +45,7 @@ public class FileController {
             fileStorageService.storeFile(file, uuid);
             String downloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/download/").path(uuid).toUriString();
-            FileResource resource =  resoureRepository.save(new FileResource(
+            FileResource resource = resoureRepository.save(new FileResource(
                     uuid, fileName, downloadUri, file.getContentType(), file.getSize()));
             return resource;
         } catch (Exception e) {
@@ -58,6 +60,7 @@ public class FileController {
      * @param files multiple files
      * @return List of FileResource
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @PostMapping("uploadMultiples")
     public List<FileResource> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.stream(files)

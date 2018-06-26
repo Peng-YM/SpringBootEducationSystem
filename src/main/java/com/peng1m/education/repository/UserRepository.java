@@ -2,8 +2,6 @@ package com.peng1m.education.repository;
 
 import com.peng1m.education.model.User;
 import io.swagger.annotations.Api;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -50,7 +48,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     @PostAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER') or returnObject.get().userId == #id")
     @Override
     Optional<User> findById(@Param("id") Long id);
-
 
 
     /**
