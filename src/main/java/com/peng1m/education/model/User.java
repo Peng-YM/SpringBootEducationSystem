@@ -32,7 +32,6 @@ public class User {
     private String email;
 
     @NotNull
-    @JsonIgnore
     private String password;
 
     private String avatar;
