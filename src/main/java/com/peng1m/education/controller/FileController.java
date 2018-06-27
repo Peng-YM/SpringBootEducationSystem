@@ -7,9 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,29 +22,23 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-public class FileController {
+@ExposesResourceFor(FileResource.class)
+public class FileController{
     private static final Logger LOGGER = LoggerFactory.getLogger(FileController.class);
     @Autowired
     private FileStorageService fileStorageService;
     @Autowired
-    private ResourceRepository resoureRepository;
+    private ResourceRepository resourceRepository;
 
-    /**
-     * Upload file to server
-     *
-     * @param file file
-     * @return FileResource
-     */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
-    @PostMapping("uploadFile")
-    public FileResource uploadFile(@RequestParam("file") MultipartFile file) {
+
+    private FileResource uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             String uuid = UUID.randomUUID().toString();
-            String fileName = file.getName();
+            String fileName = file.getOriginalFilename();
             fileStorageService.storeFile(file, uuid);
             String downloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/download/").path(uuid).toUriString();
-            FileResource resource = resoureRepository.save(new FileResource(
+            FileResource resource = resourceRepository.save(new FileResource(
                     uuid, fileName, downloadUri, file.getContentType(), file.getSize()));
             return resource;
         } catch (Exception e) {
@@ -61,7 +54,8 @@ public class FileController {
      * @return List of FileResource
      */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
-    @PostMapping("uploadMultiples")
+    @PostMapping("upload")
+    @ResponseBody
     public List<FileResource> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.stream(files)
                 .map(this::uploadFile)
@@ -76,6 +70,7 @@ public class FileController {
      * @return Resource
      */
     @GetMapping("download/{uuid:.+}")
+    @ResponseBody
     public ResponseEntity<Resource> downloadFile(@PathVariable String uuid, HttpServletRequest request) throws Exception {
         // Load file as resource
         Resource resource = fileStorageService.loadFileAsResource(uuid);

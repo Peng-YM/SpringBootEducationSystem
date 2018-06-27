@@ -62,7 +62,7 @@ Table of Contents
    $ java -jar *.jar # run the application
    ```
 
-## 2. Techneques
+## 2. Techneques Stacks
 
 - [x] SpringBoot
 - [x] JPA Hibernate

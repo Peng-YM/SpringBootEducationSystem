@@ -31,6 +31,9 @@ public class Application {
     @Autowired
     private MarkRepository markRepository;
     @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
     private BCryptPasswordEncoder encoder;
 
     public static void main(String args[]) {
@@ -49,6 +52,8 @@ public class Application {
         roleRepository.deleteAll();
         examRepository.deleteAll();
         markRepository.deleteAll();
+        resourceRepository.deleteAll();
+
 
         Role userRole = roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.save(new Role("ROLE_ADMIN"));
